@@ -1,12 +1,20 @@
 (ns fabric-todos.core
-    (:require
-      [reagent.core :as r]))
+  (:require [Fabric]
+            [reagent.core :as r]))
 
-;; -------------------------
-;; Views
+;; Fabric elements ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(def Button js/Fabric.PrimaryButton)
+(def Rating js/Fabric.Rating)
+(def Text js/Fabric.Text)
+
+;; Views ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn home-page []
-  [:div [:h2 "Welcome to Reagent"]])
+  [:div.ms-Grid
+   [:div.ms-Grid-row
+    [:> Text {:variant "large"} "Welcome to Reagent"]]
+   ])
 
 ;; -------------------------
 ;; Initialize app
