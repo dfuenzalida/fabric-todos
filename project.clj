@@ -32,6 +32,10 @@
                          :asset-path   "js/out"
                          :source-map true
                          :optimizations :none
+                         :foreign-libs [
+                                        {:file "https://unpkg.com/office-ui-fabric-react@6/dist/office-ui-fabric-react.min.js"
+                                         :provides ["Fabric"]}
+                                        ]
                          :pretty-print  true}
                         :figwheel
                         {:on-jsload "fabric-todos.core/mount-root"
