@@ -6,12 +6,17 @@
 
 (def Button js/Fabric.PrimaryButton)
 (def Rating js/Fabric.Rating)
+(def Pivot js/Fabric.Pivot)
+(def PivotItem js/Fabric.PivotItem)
 (def PrimaryButton js/Fabric.PrimaryButton)
 (def Text js/Fabric.Text)
 (def TextField js/Fabric.TextField)
 (def Stack js/Fabric.Stack)
 
 ;; Components ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn pivot-filter [pivot-item]
+  (println pivot-item.props.headerText))
 
 (defn todo-header []
   [:> Stack
@@ -22,6 +27,11 @@
     [:> Stack.Item {:grow true}
      [:> TextField {:placeholder "What needs to be done?"}]]
     [:> PrimaryButton "Add"]]
+
+   [:> Pivot {:onLinkClick pivot-filter}
+    [:> PivotItem {:headerText "all"}]
+    [:> PivotItem {:headerText "active"}]
+    [:> PivotItem {:headerText "completed"}]]
    ])
 
 (defn todo-app []
