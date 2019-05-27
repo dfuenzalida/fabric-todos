@@ -13,10 +13,15 @@
 (def TextField js/Fabric.TextField)
 (def Stack js/Fabric.Stack)
 
+(defonce state (r/atom {}))
 ;; Components ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pivot-filter [pivot-item]
   (println pivot-item.props.headerText))
+
+(defn textfield-change [event newValue]
+  (swap! state assoc-in [:labelInput] newValue)
+  (println newValue))
 
 (defn todo-header []
   [:> Stack
@@ -25,7 +30,7 @@
      [:> Text {:variant "xxLarge"} "todos"]]]
    [:> Stack {:horizontal "horizontal"}
     [:> Stack.Item {:grow true}
-     [:> TextField {:placeholder "What needs to be done?"}]]
+     [:> TextField {:placeholder "What needs to be done?" :value (str "" (get-in @state [:labelInput])) :onChange textfield-change}]]
     [:> PrimaryButton "Add"]]
 
    [:> Pivot {:onLinkClick pivot-filter}
