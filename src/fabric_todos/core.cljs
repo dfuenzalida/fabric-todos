@@ -7,6 +7,7 @@
 
 (def Button js/Fabric.PrimaryButton)
 (def Checkbox js/Fabric.Checkbox)
+(def DefaultButton js/Fabric.DefaultButton)
 (def IconButton js/Fabric.IconButton)
 (def Rating js/Fabric.Rating)
 (def Pivot js/Fabric.Pivot)
@@ -28,6 +29,17 @@
 (defn delete-todo [id]
   (let [new-todos (into [] (remove #(= id (:id %)) (:todos @state)))]
     (swap! state assoc :todos new-todos)))
+
+(defn edit-todo [id]
+  (let [todos (:todos @state)]
+    (swap! state assoc :todos
+           (mapv #(if (= id (:id %))
+                    (update-in % [:editing] false?)
+                    %) todos))))
+
+(defn update-todo [id]
+  ;; TODO implement
+  (edit-todo id))
 
 (defn toggle-done [id]
   (println id)
@@ -80,12 +92,21 @@
 
 (defn todo-item [{:keys [id text editing done] :as item}]
   [:div {:key (str "stack" id)}
-   [:> Stack {:horizontal "horizontal" :horizontalAlign "space-between" :verticalAlign "center" }
-    (when-not editing
+   [:> Stack {:horizontal true :horizontalAlign "space-between" :verticalAlign "center" }
+    (if editing
       [:> Stack.Item {:grow true}
-       [:> Checkbox {:label text :checked done :onChange #(toggle-done id)}]
-       [:> IconButton {:iconProps {:iconName "Edit"} :className "clearButton"}]
-       [:> IconButton {:iconProps {:iconName "Cancel"} :className "clearButton" :onClick (fn [] (delete-todo id))}]
+       [:> Stack {:horizontal "horizontal"}
+        [:> Stack.Item {:grow true}
+         [:> TextField {:value text}]]
+        [:> DefaultButton {:onClick #(update-todo id)} "save"]]]
+      ;; else
+      [:> Stack.Item {:grow true}
+       [:> Stack {:horizontal true}
+        [:> Stack.Item {:grow true}
+         [:> Checkbox {:label text :checked done :onChange #(toggle-done id)}]]
+        [:> Stack
+         [:> IconButton {:iconProps {:iconName "Edit"} :className "clearButton" :onClick #(edit-todo id)}]]
+        [:> IconButton {:iconProps {:iconName "Cancel"} :className "clearButton" :onClick #(delete-todo id)}]]
        ]
       )]])
 
