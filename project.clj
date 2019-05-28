@@ -46,6 +46,10 @@
                         {:output-to "public/js/app.js"
                          :output-dir "public/js/release"
                          :optimizations :advanced
+                         :foreign-libs [
+                                        {:file "https://unpkg.com/office-ui-fabric-react@6/dist/office-ui-fabric-react.min.js"
+                                         :provides ["Fabric"]}
+                                        ]
                          :infer-externs true
                          :pretty-print false}}}}
 
