@@ -68,7 +68,7 @@
     (when-not (blank? text)
       (add-todo text)
       (swap! state assoc :labelInput "")
-      ;; TODO focus the textfield again
+      (.focus (.getElementById js/document "newTodo"))
       (when debug (println @state)))))
 
 (defn todo-header []
@@ -78,7 +78,8 @@
      [:> Text {:variant "xxLarge"} "todos"]]]
    [:> Stack {:horizontal "horizontal"}
     [:> Stack.Item {:grow true}
-     [:> TextField {:placeholder "What needs to be done?"
+     [:> TextField {:id "newTodo"
+                    :placeholder "What needs to be done?"
                     :value (:labelInput @state)
                     :onKeyDown #(when (= 13 (.-which %)) (add-btn-handler))
                     :onChange textfield-change}]]
