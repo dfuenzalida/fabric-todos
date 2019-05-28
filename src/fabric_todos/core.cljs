@@ -54,6 +54,10 @@
 (defn update-filter [label]
   (swap! state assoc :filter label))
 
+(defn clear-completed []
+  (let [items (into [] (remove #(= true (:done %)) (:todos @state)))]
+    (swap! state assoc :todos items)))
+
 ;; Header ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pivot-filter [pivot-item]
@@ -121,6 +125,15 @@
      (map todo-item filtered-todos)
      ]))
 
+;; Todo footer ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(defn todo-footer []
+  (let [remaining (count (remove #(= true (:done %)) (:todos @state)))
+        label     (str remaining " item" (when-not (= 1 remaining) "s") " left")]
+    [:> Stack {:horizontal true :horizontalAlign "space-between"}
+     [:> Text label]
+     [:> DefaultButton {:onClick clear-completed} "Clear Completed"]]))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn todo-app []
@@ -128,6 +141,7 @@
    [:> Stack {:style {:width 400} :gap "25"}
     (todo-header)
     (todo-list)
+    (todo-footer)
     ]
    ])
 
