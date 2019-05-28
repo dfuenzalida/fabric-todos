@@ -17,7 +17,7 @@
 (def TextField js/Fabric.TextField)
 (def Stack js/Fabric.Stack)
 
-(defonce state (r/atom {:todos [] :counter 0 :labelInput ""}))
+(defonce state (r/atom {:todos [] :counter 0 :labelInput "" :filter "all"}))
 (def debug true) ;; using 'def' on purpose to throw state in between reloads
 
 ;; State APIs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51,11 +51,13 @@
     ;; (swap! state update-in [:todos id :done] false?)
     (when debug (println @state))))
 
+(defn update-filter [label]
+  (swap! state assoc :filter label))
+
 ;; Header ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn pivot-filter [pivot-item]
-  ;; TODO implement
-  (println pivot-item.props.headerText))
+  (update-filter pivot-item.props.headerText))
 
 (defn textfield-change [event newValue]
   (swap! state assoc :labelInput newValue)
@@ -111,9 +113,12 @@
       )]])
 
 (defn todo-list []
-  [:> Stack {:gap 10}
-   (map todo-item (:todos @state))
-   ])
+  (let [remove-map {"all" nil "active" true "completed" false}
+        remove-on  (get remove-map (:filter @state))
+        filtered-todos (remove #(= remove-on (:done %)) (:todos @state))]
+    [:> Stack {:gap 10}
+     (map todo-item filtered-todos)
+     ]))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
