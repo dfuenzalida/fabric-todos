@@ -1,3 +1,10 @@
+# Fabric TODOs
+
+An implementation of the TODO MVC application using Microsoft's UI Fabric React.
+
+### Screenshot
+
+TBC
 
 ### Development mode
 
