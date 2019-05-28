@@ -30,26 +30,22 @@
   (let [new-todos (into [] (remove #(= id (:id %)) (:todos @state)))]
     (swap! state assoc :todos new-todos)))
 
-(defn edit-todo [id]
+(defn toggle-attribute [id attr]
   (let [todos (:todos @state)]
     (swap! state assoc :todos
            (mapv #(if (= id (:id %))
-                    (update-in % [:editing] false?)
+                    (update-in % [attr] false?)
                     %) todos))))
+
+(defn edit-todo [id]
+  (toggle-attribute id :editing))
 
 (defn update-todo [id]
   ;; TODO implement
   (edit-todo id))
 
 (defn toggle-done [id]
-  (println id)
-  (let [todos (:todos @state)]
-    (swap! state assoc :todos
-           (mapv #(if (= id (:id %))
-                    (update-in % [:done] false?)
-                    %) todos))
-    ;; (swap! state update-in [:todos id :done] false?)
-    (when debug (println @state))))
+  (toggle-attribute id :done))
 
 (defn update-filter [label]
   (swap! state assoc :filter label))
@@ -88,12 +84,10 @@
                     :onKeyDown #(when (= 13 (.-which %)) (add-btn-handler))
                     :onChange textfield-change}]]
     [:> PrimaryButton {:onClick add-btn-handler} "Add"]]
-
    [:> Pivot {:onLinkClick pivot-filter}
     [:> PivotItem {:headerText "all"}]
     [:> PivotItem {:headerText "active"}]
-    [:> PivotItem {:headerText "completed"}]]
-   ])
+    [:> PivotItem {:headerText "completed"}]]])
 
 ;; Todo List ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -122,8 +116,7 @@
         remove-on  (get remove-map (:filter @state))
         filtered-todos (remove #(= remove-on (:done %)) (:todos @state))]
     [:> Stack {:gap 10}
-     (map todo-item filtered-todos)
-     ]))
+     (map todo-item filtered-todos)]))
 
 ;; Todo footer ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -141,9 +134,7 @@
    [:> Stack {:style {:width 400} :gap "25"}
     (todo-header)
     (todo-list)
-    (todo-footer)
-    ]
-   ])
+    (todo-footer)]])
 
 ;; App initialization ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
