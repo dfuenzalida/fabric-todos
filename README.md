@@ -4,7 +4,7 @@ An implementation of the TODO MVC application using Microsoft's UI Fabric React.
 
 ### Screenshot
 
-TBC
+![fabric-todos](https://user-images.githubusercontent.com/208068/58454194-825aff80-80d2-11e9-857a-1f2aedeb0898.png)
 
 ### Development mode
 
