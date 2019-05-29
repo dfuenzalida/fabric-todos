@@ -1,8 +1,13 @@
 # Fabric TODOs
 
-An implementation of the TODO MVC application using Microsoft's UI Fabric React.
+An implementation of the classical TODO MVC application using ClojureScript, [Reagent](http://reagent-project.github.io/), React and Microsoft's UI Fabric React.
 
-Based on the UI Fabric component library demo from the Microsoft [Frontend Bootcamp](https://microsoft.github.io/frontend-bootcamp/step2-02/demo/)
+Based on the UI Fabric component library demo from the Microsoft [Frontend Bootcamp](https://microsoft.github.io/frontend-bootcamp/step2-02/demo/).
+
+### Requirements
+
+* [Java](https://adoptopenjdk.net/)
+* [Leiningen](https://leiningen.org/)
 
 ### Screenshot
 
