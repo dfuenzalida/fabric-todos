@@ -29,10 +29,10 @@
    [:> fab/Stack {:horizontal "horizontal"}
     [:> fab/Stack.Item {:grow true}
      [:> fab/TextField {:id "newTodo"
-                    :placeholder "What needs to be done?"
-                    :value (:labelInput @state/state)
-                    :onKeyDown #(when (= 13 (.-which %)) (add-btn-handler))
-                    :onChange textfield-change}]]
+                        :placeholder "What needs to be done?"
+                        :value (:labelInput @state/state)
+                        :onKeyDown #(when (= 13 (.-which %)) (add-btn-handler))
+                        :onChange textfield-change}]]
     [:> fab/PrimaryButton {:onClick add-btn-handler} "Add"]]
    [:> fab/Pivot {:onLinkClick pivot-filter}
     [:> fab/PivotItem {:headerText "all"}]
