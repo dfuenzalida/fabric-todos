@@ -4,7 +4,6 @@
 
 ;; Fabric elements ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def Button js/Fabric.PrimaryButton)
 (def Checkbox js/Fabric.Checkbox)
 (def DefaultButton js/Fabric.DefaultButton)
 (def IconButton js/Fabric.IconButton)
