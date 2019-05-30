@@ -9,6 +9,7 @@
                  [reagent "0.8.1"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
+            [macchiato/lein-npm "0.6.6"]
             [lein-figwheel "0.5.18"]]
 
   :clean-targets ^{:protect false}
@@ -23,6 +24,8 @@
              :nrepl-middleware [cider.piggieback/wrap-cljs-repl]
              :css-dirs ["public/css"]}
 
+  :npm {:dependencies [[office-ui-fabric-react "6.186.1"]]}
+
   :cljsbuild {:builds {:app
                        {:source-paths ["src" "env/dev/cljs"]
                         :compiler
@@ -32,8 +35,9 @@
                          :asset-path   "js/out"
                          :source-map true
                          :optimizations :none
+                         :infer-externs true
                          :foreign-libs [
-                                        {:file "https://unpkg.com/office-ui-fabric-react@6/dist/office-ui-fabric-react.min.js"
+                                        {:file "./node_modules/office-ui-fabric-react/dist/office-ui-fabric-react.min.js"
                                          :provides ["Fabric"]}
                                         ]
                          :pretty-print  true}
@@ -47,7 +51,7 @@
                          :output-dir "public/js/release"
                          :optimizations :advanced
                          :foreign-libs [
-                                        {:file "https://unpkg.com/office-ui-fabric-react@6/dist/office-ui-fabric-react.min.js"
+                                        {:file "./node_modules/office-ui-fabric-react/dist/office-ui-fabric-react.min.js"
                                          :provides ["Fabric"]}
                                         ]
                          :infer-externs true

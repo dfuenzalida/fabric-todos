@@ -8,6 +8,7 @@ Based on the UI Fabric component library demo from the Microsoft [Frontend Bootc
 
 * [Java](https://adoptopenjdk.net/)
 * [Leiningen](https://leiningen.org/)
+* [NodeJS](https://nodejs.org/)
 
 ### Screenshot
 
@@ -15,7 +16,15 @@ Based on the UI Fabric component library demo from the Microsoft [Frontend Bootc
 
 ### Development mode
 
-To start the Figwheel compiler, navigate to the project folder and run the following command in the terminal:
+Navigate to the project folder and run the following commands in the terminal.
+
+To download both the Clojure and NodeJS dependencies run:
+
+```
+lein deps
+```
+
+To start the Figwheel compiler run the following command:
 
 ```
 lein figwheel
