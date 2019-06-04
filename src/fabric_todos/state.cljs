@@ -4,7 +4,7 @@
 ;; Global app state ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defonce state (r/atom {:todos [] :counter 0 :labelInput "" :filter "all"}))
-(def debug true) ;; using 'def' on purpose to throw state in between reloads
+(def debug false) ;; using 'def' on purpose to throw state in between reloads
 
 ;; State APIs ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -39,3 +39,19 @@
 (defn clear-completed []
   (let [items (into [] (remove #(= true (:done %)) (:todos @state)))]
     (swap! state assoc :todos items)))
+
+(defn update-label-input [new-value]
+  (swap! state assoc :labelInput new-value)
+  (when debug (println state)))
+
+(defn new-todo-value []
+  (:labelInput @state))
+
+(defn remaining-todos []
+  (remove #(= true (:done %)) (:todos @state)))
+
+(defn filtered-todos []
+  (let [remove-map {"all" nil "active" true "completed" false}
+        remove-on  (get remove-map (:filter @state))]
+    (remove #(= remove-on (:done %)) (:todos @state))))
+

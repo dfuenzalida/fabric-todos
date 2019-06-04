@@ -23,9 +23,6 @@
       )]])
 
 (defn todo-list []
-  (let [remove-map {"all" nil "active" true "completed" false}
-        remove-on  (get remove-map (:filter @state/state))
-        filtered-todos (remove #(= remove-on (:done %)) (:todos @state/state))]
-    [:> fab/Stack {:gap 10}
-     (map todo-item filtered-todos)]))
+  [:> fab/Stack {:gap 10}
+   (map todo-item (state/filtered-todos))])
 

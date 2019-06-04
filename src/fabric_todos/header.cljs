@@ -9,17 +9,15 @@
 (defn pivot-filter [pivot-item]
   (state/update-filter pivot-item.props.headerText))
 
-(defn textfield-change [event newValue]
-  (swap! state/state assoc :labelInput newValue)
-  (when state/debug (println @state/state)))
+(defn textfield-change [event new-value]
+  (state/update-label-input new-value))
 
 (defn add-btn-handler []
   (let [text (get @state/state :labelInput)]
     (when-not (blank? text)
       (state/add-todo text)
-      (swap! state/state assoc :labelInput "")
-      (focus-new-todo)
-      (when state/debug (println @state/state)))))
+      (state/update-label-input "")
+      (focus-new-todo))))
 
 (defn todo-header []
   [:> fab/Stack
@@ -30,7 +28,7 @@
     [:> fab/Stack.Item {:grow true}
      [:> fab/TextField {:id "newTodo"
                         :placeholder "What needs to be done?"
-                        :value (:labelInput @state/state)
+                        :value (state/new-todo-value)
                         :onKeyDown #(when (= 13 (.-which %)) (add-btn-handler))
                         :onChange textfield-change}]]
     [:> fab/PrimaryButton {:onClick add-btn-handler} "Add"]]

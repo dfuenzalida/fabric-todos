@@ -3,7 +3,7 @@
             [fabric-todos.state :as state]))
 
 (defn todo-footer []
-  (let [remaining (count (remove #(= true (:done %)) (:todos @state/state)))
+  (let [remaining (count (state/remaining-todos))
         label     (str remaining " item" (when-not (= 1 remaining) "s") " left")]
     [:> fab/Stack {:horizontal true :horizontalAlign "space-between"}
      [:> fab/Text label]
