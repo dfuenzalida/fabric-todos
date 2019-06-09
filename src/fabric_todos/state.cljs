@@ -21,9 +21,8 @@
 (defn edit-todo [id]
   (toggle-attribute id :editing))
 
-(defn update-todo [id]
-  ;; TODO implement
-  (edit-todo id))
+(defn update-todo [id text]
+  (swap! state update-in [:todos id] merge {:editing false :text text}))
 
 (defn toggle-done [id]
   (toggle-attribute id :done))

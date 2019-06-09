@@ -1,16 +1,19 @@
 (ns fabric-todos.todo-list
   (:require [fabric-todos.fabric :as fab]
-            [fabric-todos.state :as state]))
+            [fabric-todos.state :as state]
+            [reagent.core :refer [atom]]))
 
 (defn todo-item [{:keys [id text editing done] :as item}]
   [:div {:key (str "stack" id)}
-   [:> fab/Stack {:horizontal true :horizontalAlign "space-between" :verticalAlign "center" }
+   [:> fab/Stack {:horizontal true :horizontalAlign "space-between" :verticalAlign "center"}
     (if editing
-      [:> fab/Stack.Item {:grow true}
-       [:> fab/Stack {:horizontal "horizontal"}
+      (let [text-value (atom text)]
         [:> fab/Stack.Item {:grow true}
-         [:> fab/TextField {:value text}]]
-        [:> fab/DefaultButton {:onClick #(state/update-todo id)} "save"]]]
+         [:> fab/Stack {:horizontal "horizontal"}
+          [:> fab/Stack.Item {:grow true}
+           [:> fab/TextField {:value @text-value
+                              :onChange (fn [ev val] (reset! text-value val))}]]
+          [:> fab/DefaultButton {:onClick #(state/update-todo id @text-value)} "save"]]])
       ;; else
       [:> fab/Stack.Item {:grow true}
        [:> fab/Stack {:horizontal true}
