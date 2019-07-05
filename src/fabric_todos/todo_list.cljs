@@ -9,21 +9,18 @@
     (if editing
       (let [text-value (atom text)]
         [:> fab/Stack.Item {:grow true}
-         [:> fab/Stack {:horizontal "horizontal"}
+         [:> fab/Stack {:horizontal true}
           [:> fab/Stack.Item {:grow true}
            [:> fab/TextField {:value @text-value
                               :onChange (fn [ev val] (reset! text-value val))}]]
           [:> fab/DefaultButton {:onClick #(state/update-todo id @text-value)} "save"]]])
       ;; else
-      [:> fab/Stack.Item {:grow true}
-       [:> fab/Stack {:horizontal true}
-        [:> fab/Stack.Item {:grow true}
-         [:> fab/Checkbox {:label text :checked done :onChange #(state/toggle-done id)}]]
-        [:> fab/Stack
-         [:> fab/IconButton {:iconProps {:iconName "Edit"} :className "clearButton" :onClick #(state/edit-todo id)}]]
-        [:> fab/IconButton {:iconProps {:iconName "Cancel"} :className "clearButton" :onClick #(state/delete-todo id)}]]
-       ]
-      )]])
+      [:<>
+       [:> fab/Checkbox {:label text :checked done :onChange #(state/toggle-done id)}]
+       [:div
+        [:> fab/IconButton {:iconProps {:iconName "Edit"} :className "clearButton" :onClick #(state/edit-todo id)}]
+        [:> fab/IconButton {:iconProps {:iconName "Cancel"} :className "clearButton" :onClick #(state/delete-todo id)}]]])
+    ]])
 
 (defn todo-list []
   [:> fab/Stack {:gap 10}
