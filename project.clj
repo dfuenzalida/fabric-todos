@@ -24,7 +24,7 @@
              :nrepl-middleware [cider.piggieback/wrap-cljs-repl]
              :css-dirs ["public/css"]}
 
-  :npm {:dependencies [[office-ui-fabric-react "6.186.1"]]}
+  :npm {:dependencies [[office-ui-fabric-react "6.195.0"]]}
 
   :cljsbuild {:builds {:app
                        {:source-paths ["src" "env/dev/cljs"]
@@ -49,9 +49,9 @@
                         :compiler
                         {:output-to "public/js/app.js"
                          :output-dir "public/js/release"
-                         :optimizations :advanced
+                         :optimizations :whitespace
                          :foreign-libs [
-                                        {:file "./node_modules/office-ui-fabric-react/dist/office-ui-fabric-react.min.js"
+                                        {:file "./node_modules/office-ui-fabric-react/dist/office-ui-fabric-react.js"
                                          :provides ["Fabric"]}
                                         ]
                          :infer-externs true
