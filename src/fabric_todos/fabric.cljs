@@ -1,16 +1,20 @@
 (ns fabric-todos.fabric
-  (:require [Fabric]
-            [reagent.core :as r]))
+  (:require ["office-ui-fabric-react" :as Fabric]))
 
 ;; Fabric elements ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(def Checkbox js/Fabric.Checkbox)
-(def DefaultButton js/Fabric.DefaultButton)
-(def IconButton js/Fabric.IconButton)
-(def Rating js/Fabric.Rating)
-(def Pivot js/Fabric.Pivot)
-(def PivotItem js/Fabric.PivotItem)
-(def PrimaryButton js/Fabric.PrimaryButton)
-(def Text js/Fabric.Text)
-(def TextField js/Fabric.TextField)
-(def Stack js/Fabric.Stack)
+(def Checkbox Fabric/Checkbox)
+(def DefaultButton Fabric/DefaultButton)
+(def IconButton Fabric/IconButton)
+(def Rating Fabric/Rating)
+(def Pivot Fabric/Pivot)
+(def PivotItem Fabric/PivotItem)
+(def PrimaryButton Fabric/PrimaryButton)
+(def Text Fabric/Text)
+(def TextField Fabric/TextField)
+(def Stack Fabric/Stack)
+
+(defn init-icons!
+  "Load the icon fonts. See https://github.com/OfficeDev/office-ui-fabric-react/wiki/Using-icons"
+  []
+  (Fabric/initializeIcons))

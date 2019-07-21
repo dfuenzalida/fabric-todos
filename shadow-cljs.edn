@@ -1,0 +1,10 @@
+{:source-paths ["src"]
+ :dependencies [[reagent "0.8.1"]
+                [thheller/shadow-cljsjs "0.0.18"]]
+ :dev-http {8080 "target/"}
+ :builds {:app {:output-dir "target/"
+                :asset-path "."
+                :target :browser
+                :compiler-options {:infer-externs :auto}
+                :modules {:main {:init-fn fabric-todos.core/init!}}
+                :devtools {:after-load fabric-todos.core/reload!}}}}

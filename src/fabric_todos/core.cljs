@@ -21,4 +21,8 @@
 
 (defn init! []
   (mount-root)
+  (fab/init-icons!)
   (header/focus-new-todo))
+
+(defn reload! []
+  (println "reloading..."))
