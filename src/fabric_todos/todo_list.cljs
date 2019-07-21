@@ -7,12 +7,12 @@
   [:div {:key (str "stack" id)}
    [:> fab/Stack {:horizontal true :horizontalAlign "space-between" :verticalAlign "center"}
     (if editing
-      (let [text-value (atom text)]
+      (let [text-value (atom text)
+            update-fn  (fn [ev val] (reset! text-value val))]
         [:> fab/Stack.Item {:grow true}
          [:> fab/Stack {:horizontal true}
           [:> fab/Stack.Item {:grow true}
-           [:> fab/TextField {:value @text-value
-                              :onChange (fn [ev val] (reset! text-value val))}]]
+           [:> fab/TextField {:value @text-value :onChange update-fn :onKeyDown update-fn}]]
           [:> fab/DefaultButton {:onClick #(state/update-todo id @text-value)} "save"]]])
       ;; else
       [:<>
