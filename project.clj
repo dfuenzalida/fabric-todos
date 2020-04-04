@@ -4,13 +4,13 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.10.0"]
-                 [org.clojure/clojurescript "1.10.520"]
-                 [reagent "0.8.1"]]
+  :dependencies [[org.clojure/clojure "1.10.1"]
+                 [org.clojure/clojurescript "1.10.597"]
+                 [reagent "0.10.0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [macchiato/lein-npm "0.6.6"]
-            [lein-figwheel "0.5.18"]]
+            [lein-figwheel "0.5.19"]]
 
   :clean-targets ^{:protect false}
   [:target-path
@@ -24,7 +24,7 @@
              :nrepl-middleware [cider.piggieback/wrap-cljs-repl]
              :css-dirs ["public/css"]}
 
-  :npm {:dependencies [[office-ui-fabric-react "6.186.1"]]}
+  :npm {:dependencies [[office-ui-fabric-react "7.105.9"]]}
 
   :cljsbuild {:builds {:app
                        {:source-paths ["src" "env/dev/cljs"]
