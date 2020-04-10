@@ -3,7 +3,8 @@
             [fabric-todos.header :as header]
             [fabric-todos.todo-list :as todo-list]
             [fabric-todos.footer :as footer]
-            [reagent.core :as r]))
+            [reagent.core :as r]
+            [reagent.dom :as rdom]))
 
 ;; Main application ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -17,7 +18,7 @@
 ;; App initialization ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defn mount-root []
-  (r/render [todo-app] (.getElementById js/document "app")))
+  (rdom/render [todo-app] (.getElementById js/document "app")))
 
 (defn init! []
   (mount-root)
