@@ -13,7 +13,7 @@ Based on the UI Fabric component library demo from the Microsoft [Frontend Bootc
 
 ### Screenshot
 
-![fabric-todos](https://user-images.githubusercontent.com/208068/58454194-825aff80-80d2-11e9-857a-1f2aedeb0898.png)
+![fabric-todos](https://user-images.githubusercontent.com/208068/98193662-9bc0c780-1ed2-11eb-8943-8a3c0f6f6ce0.png)
 
 ### Development mode
 
