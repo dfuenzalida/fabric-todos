@@ -16,3 +16,6 @@ pom.xml.asc
 /.env
 node_modules
 package-lock.json
+/.shadow-cljs
+yarn.lock
+

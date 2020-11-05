@@ -1,6 +1,6 @@
 (ns fabric-todos.header
   (:require [clojure.string :refer [blank?]]
-            [fabric-todos.fabric :as fab]
+            ["@fluentui/react" :as f]
             [fabric-todos.state :as state]))
 
 (defn focus-new-todo []
@@ -20,19 +20,19 @@
       (focus-new-todo))))
 
 (defn todo-header []
-  [:> fab/Stack
-   [:> fab/Stack {:horizontal true :horizontalAlign "center"}
-    [:> fab/Stack.Item {:align "center"}
-     [:> fab/Text {:variant "xxLarge"} "todos"]]]
-   [:> fab/Stack {:horizontal "horizontal"}
-    [:> fab/Stack.Item {:grow true}
-     [:> fab/TextField {:id "newTodo"
+  [:> f/Stack
+   [:> f/Stack {:horizontal true :horizontalAlign "center"}
+    [:> f/Stack.Item {:align "center"}
+     [:> f/Text {:variant "xxLarge"} "todos"]]]
+   [:> f/Stack {:horizontal "horizontal"}
+    [:> f/Stack.Item {:grow true}
+     [:> f/TextField {:id "newTodo"
                         :placeholder "What needs to be done?"
                         :value (state/new-todo-value)
                         :onKeyDown #(when (= 13 (.-which %)) (add-btn-handler))
                         :onChange textfield-change}]]
-    [:> fab/PrimaryButton {:onClick add-btn-handler} "Add"]]
-   [:> fab/Pivot {:onLinkClick pivot-filter}
-    [:> fab/PivotItem {:headerText "all"}]
-    [:> fab/PivotItem {:headerText "active"}]
-    [:> fab/PivotItem {:headerText "completed"}]]])
+    [:> f/PrimaryButton {:onClick add-btn-handler} "Add"]]
+   [:> f/Pivot {:onLinkClick pivot-filter}
+    [:> f/PivotItem {:headerText "all"}]
+    [:> f/PivotItem {:headerText "active"}]
+    [:> f/PivotItem {:headerText "completed"}]]])
