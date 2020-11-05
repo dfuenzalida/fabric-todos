@@ -1,27 +1,29 @@
 {
-   "name": "fabric-todos",
-   "version": "1.0.0",
-   "description": "TODOs application in CLJS, Reagent and Microsoft UI Fabric React",
-   "main": "index.js",
-   "scripts": {
-      "watch": "shadow-cljs watch app",
-      "compile": "shadow-cljs compile app",
-      "release": "shadow-cljs release app",
-      "html": "mkdir -p target && cp assets/index.html target/",
-      "serve": "yarn html && http-server target/",
-      "del": "rm -r target/*",
-      "build": "yarn release && yarn html && yarn serve"
-   },
-   "author": "Denis Fuenzalida",
-   "license": "MIT",
-   "devDependencies": {
-      "http-server": "^0.11.1",
-      "shadow-cljs": "^2.8.40"
-   },
-   "dependencies": {
-      "create-react-class": "^15.6.3",
-      "office-ui-fabric-react": "^6.195.3",
-      "react": "^16.8.6",
-      "react-dom": "^16.8.6"
-   }
+    "name": "fabric-todos",
+    "version": "1.0.0",
+    "description": "TODOs application in ClojureScript, Reagent and Microsoft Fluent UI",
+    "main": "index.js",
+    "license": "MIT",
+    "devDependencies": {
+        "http-server": "^0.12.3",
+        "shadow-cljs": "^2.11.7"
+    },
+    "dependencies": {
+        "@fluentui/react": "^7.149.3",
+        "@uifabric/icons": "^7.5.15",
+        "create-react-class": "^15.7.0",
+        "react": "^16.13.0",
+        "react-dom": "^16.13.0"
+    },
+    "author": "Denis Fuenzalida",
+    "license": "MIT",
+    "scripts": {
+        "watch": "shadow-cljs watch app",
+        "compile": "shadow-cljs compile app",
+        "release": "shadow-cljs release app",
+        "html": "mkdir -p target && cp assets/index.html target/",
+        "serve": "yarn html && http-server target/",
+        "del": "rm -r target/*",
+        "build": "yarn release && yarn html && yarn serve"
+    }
 }
