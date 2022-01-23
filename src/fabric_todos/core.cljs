@@ -1,6 +1,6 @@
 (ns fabric-todos.core
   (:require ["@fluentui/react" :as f]
-            ["@uifabric/icons" :as ui]
+            ["@fluentui/font-icons-mdl2" :refer [initializeIcons]]
             [reagent.dom :as rdom]
             [fabric-todos.header :as header]
             [fabric-todos.todo-list :as todo-list]
@@ -25,7 +25,7 @@
 
 (defn main! []
   (println "starting...")
-  (ui/initializeIcons)
+  (initializeIcons)
   (init-ui))
 
 (defn ^:dev/after-load reload! []
