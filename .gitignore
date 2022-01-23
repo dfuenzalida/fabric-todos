@@ -18,4 +18,5 @@ node_modules
 package-lock.json
 /.shadow-cljs
 yarn.lock
-
+/.clj-kondo
+/.lsp
